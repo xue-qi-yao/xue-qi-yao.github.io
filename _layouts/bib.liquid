@@ -313,14 +313,17 @@
           {% endif %}
           {% if site.enable_publication_badges.google_scholar and entry_has_google_scholar_badge %}
             <a
-              href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user={{ site.data.socials.scholar_userid }}&citation_for_view={{ site.data.socials.scholar_userid }}:{{ entry.google_scholar_id }}"
+              href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user={{ site.data.socials.scholar_userid }}&citation_for_view={{ entry.google_scholar_id }}"
               aria-label="Google Scholar link"
               role="button"
             >
-              <img
-                src="https://img.shields.io/badge/scholar-{% google_scholar_citations site.data.socials.scholar_userid entry.google_scholar_id %}-4285F4?logo=googlescholar&labelColor=beige"
-                alt="{% google_scholar_citations site.data.socials.scholar_userid entry.google_scholar_id %} Google Scholar citations"
-              >
+              {% assign citation_count = google_scholar_citations site.data.socials.scholar_userid entry.google_scholar_id %}
+              <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&citation_for_view={{ entry.google_scholar_id }}">
+                <img
+                  src="https://img.shields.io/badge/scholar-{{ citation_count | url_encode }}-4285F4?logo=googlescholar&labelColor=beige"
+                  alt="{{ citation_count }} Google Scholar citations"
+                />
+              </a>
             </a>
           {% endif %}
           {% if site.enable_publication_badges.inspirehep and entry_has_inspirehep_badge %}
