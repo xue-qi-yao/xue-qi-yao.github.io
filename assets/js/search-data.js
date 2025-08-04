@@ -64,6 +64,9 @@ ninja.data = [{
           section: "News",},{id: "news-paper-accpeted-to-iccv-25-highlight-poster-progait-a-multi-purpose-video-dataset-and-benchmark-for-transfemoral-prosthesis-users",
           title: 'Paper accpeted to ICCV’25 highlight poster: ProGait: A Multi-Purpose Video Dataset and Benchmark...',
           description: "",
+          section: "News",},{id: "news-new-perprint-mmbert-scaled-mixture-of-experts-multimodal-bert-for-robust-chinese-hate-speech-detection-under-cloaking-perturbations",
+          title: 'New perprint: MMBERT: Scaled Mixture-of-Experts Multimodal BERT for Robust Chinese Hate Speech Detection...',
+          description: "",
           section: "News",},{
         id: 'social-email',
         title: 'email',
