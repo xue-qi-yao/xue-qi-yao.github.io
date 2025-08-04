@@ -6,3 +6,4 @@ repo_description_lines_max: 2
 github_repos:
   - pittisl/PhyT2V
   - pittisl/ProGait
+  - xue-qi-yao/MMBERT-for-Chinese-hate-speech-detection

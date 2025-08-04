@@ -47,6 +47,12 @@
       "publisher": "IEEE/CVF Conference on International Conference on Computer Vision (ICCV)",
       "releaseDate": "2025",
       "url": "https://arxiv.org/pdf/2507.10223"
+    },
+    {
+      "name": "MMBERT: Scaled Mixture-of-Experts Multimodal BERT for Robust Chinese Hate Speech Detection under Cloaking Perturbations",
+      "publisher": "arxiv",
+      "releaseDate": "2025",
+      "url": "https://arxiv.org/pdf/2508.00760"
     }
   ],
   "awards": [
