@@ -67,6 +67,9 @@ ninja.data = [{
           section: "News",},{id: "news-new-perprint-mmbert-scaled-mixture-of-experts-multimodal-bert-for-robust-chinese-hate-speech-detection-under-cloaking-perturbations",
           title: 'New perprint: MMBERT: Scaled Mixture-of-Experts Multimodal BERT for Robust Chinese Hate Speech Detection...',
           description: "",
+          section: "News",},{id: "news-paper-accpeted-to-aaai-26-poster-mmbert-scaled-mixture-of-experts-multimodal-bert-for-robust-chinese-hate-speech-detection-under-cloaking-perturbations",
+          title: 'Paper accpeted to AAAI’26 poster: MMBERT: Scaled Mixture-of-Experts Multimodal BERT for Robust Chinese...',
+          description: "",
           section: "News",},{
         id: 'social-email',
         title: 'email',
