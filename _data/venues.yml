@@ -4,8 +4,13 @@
 
 "ICCV (Highlight)":
   url: https://iccv.thecvf.com/
+  color: "#00369f"
 
 "CVPR":
+  url: https://cvpr.thecvf.com/
+  color: "#00369f"
+
+"CVPR (Oral)":
   url: https://cvpr.thecvf.com/
   color: "#00369f"
 
