@@ -48,6 +48,12 @@ ninja.data = [{
           section: "News",},{id: "news-paper-accpeted-to-aaai-26-poster-mmbert-scaled-mixture-of-experts-multimodal-bert-for-robust-chinese-hate-speech-detection-under-cloaking-perturbations",
           title: 'Paper accpeted to AAAI’26 poster: MMBERT: Scaled Mixture-of-Experts Multimodal BERT for Robust Chinese...',
           description: "",
+          section: "News",},{id: "news-new-perprint-infinibench-infinite-benchmarking-for-visual-spatial-reasoning-with-customizable-scene-complexity",
+          title: 'New perprint: InfiniBench: Infinite Benchmarking for Visual Spatial Reasoning with Customizable Scene Complexity...',
+          description: "",
+          section: "News",},{id: "news-paper-accpeted-to-cvpr-26-oral-poster-infinibench-infinite-benchmarking-for-visual-spatial-reasoning-with-customizable-scene-complexity",
+          title: 'Paper accpeted to CVPR’26 oral poster: InfiniBench: Infinite Benchmarking for Visual Spatial Reasoning...',
+          description: "",
           section: "News",},{
         id: 'social-email',
         title: 'email',
