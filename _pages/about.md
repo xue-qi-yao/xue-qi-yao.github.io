@@ -6,7 +6,7 @@ permalink: /
 
 profile:
   align: right
-  image: qiyao_xue_pic.jpg
+  image: qiyao_xue_pic.png
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>US, Pennsylvania, Pittsburgh</p>
