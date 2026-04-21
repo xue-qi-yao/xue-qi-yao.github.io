@@ -44,7 +44,7 @@
     },
     {
       "name": "ProGait: A Multi-Purpose Video Dataset and Benchmark for Transfemoral Prosthesis Users",
-      "publisher": "IEEE/CVF Conference on International Conference on Computer Vision (ICCV)",
+      "publisher": "IEEE/CVF Conference on International Conference on Computer Vision (ICCV), Highlight",
       "releaseDate": "2025",
       "url": "https://arxiv.org/pdf/2507.10223"
     },
@@ -53,6 +53,12 @@
       "publisher": "The 40th Annual AAAI Conference on Artificial Intelligence (AAAI)",
       "releaseDate": "2026",
       "url": "https://arxiv.org/pdf/2508.00760"
+    },
+    {
+      "name": "InfiniBench: Infinite Benchmarking for Visual Spatial Reasoning with Customizable Scene Complexity",
+      "publisher": "IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Oral",
+      "releaseDate": "2026",
+      "url": "https://arxiv.org/pdf/2511.18200"
     }
   ],
   "awards": [
