@@ -54,12 +54,15 @@ ninja.data = [{
           section: "News",},{id: "news-paper-accpeted-to-cvpr-26-oral-poster-infinibench-infinite-benchmarking-for-visual-spatial-reasoning-with-customizable-scene-complexity",
           title: 'Paper accpeted to CVPR’26 oral poster: InfiniBench: Infinite Benchmarking for Visual Spatial Reasoning...',
           description: "",
+          section: "News",},{id: "news-started-as-a-first-year-phd-student-in-data-science-at-the-university-of-north-carolina-at-chapel-hill-after-moving-on-from-the-ece-phd-program-at-the-university-of-pittsburgh-new-focus-agentic-and-self-evolving-ai-particularly-for-healthcare",
+          title: 'Started as a first-year PhD student in Data Science at the University of...',
+          description: "",
           section: "News",},{
         id: 'social-email',
         title: 'email',
         section: 'Socials',
         handler: () => {
-          window.open("mailto:%31%39%30%38%33%36%34%37%64@%63%6F%6E%6E%65%63%74.%70%6F%6C%79%75.%68%6B", "_blank");
+          window.open("mailto:%71%69%79%61%6F%78%75%65@%75%6E%63.%65%64%75", "_blank");
         },
       },{
         id: 'social-github',
@@ -87,7 +90,7 @@ ninja.data = [{
         title: 'Google Scholar',
         section: 'Socials',
         handler: () => {
-          window.open("https://scholar.google.com/citations?user=yNPzzOAAAAAJ&hl", "_blank");
+          window.open("https://scholar.google.com/citations?user=yNPzzOAAAAAJ", "_blank");
         },
       },{
       id: 'light-theme',
