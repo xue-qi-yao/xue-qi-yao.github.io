@@ -1,21 +1,24 @@
 {
   "basics": {
     "name": "Qiyao Xue",
-    "label": "PhD Student",
+    "label": "PhD Student in Data Science, UNC-Chapel Hill",
     "image": "",
-    "email": "19083647d@connect.polyu.hk",
+    "email": "qiyaoxue@unc.edu",
     "phone": "(86) 13804805360",
     "url": "https://xue-qi-yao.github.io/",
-    "summary": "Generative AI researcher",
-    "profiles": [
-      {
-        "network": "Twitter",
-        "username": "AlbertEinstein",
-        "url": "https://twitter.com/AlbertEinstein"
-      }
-    ]
+    "summary": "PhD student working on agentic and self-evolving AI for healthcare",
+    "profiles": []
   },
   "education": [
+    {
+      "institution": "University of North Carolina at Chapel Hill",
+      "location": "Chapel Hill, NC, US",
+      "url": "https://www.unc.edu/",
+      "area": "Data Science",
+      "studyType": "PhD",
+      "startDate": "2026-08-25",
+      "endDate": "-"
+    },
     {
       "institution": "University of Pittsburgh",
       "location": "Pittsburgh, PA, US",
@@ -23,7 +26,7 @@
       "area": "Electrical and Computer Engineering",
       "studyType": "PhD",
       "startDate": "2024-08-30",
-      "endDate": "-"
+      "endDate": "2026-07-31"
     },
     {
       "institution": "Hong Kong Polytechnic University",
@@ -140,21 +143,21 @@
       "name": "Music",
       "icon": "fa-solid fa-tag",
       "keywords": [
-      "Eason Chan",
-      "JJ Lin",
-      "Joker Xue",
-      "Jay Chou",
-      "Shawn Mendes",
-      "Ed Sheeran",
-      "Maroon 5"
+        "Eason Chan",
+        "JJ Lin",
+        "Joker Xue",
+        "Jay Chou",
+        "Shawn Mendes",
+        "Ed Sheeran",
+        "Maroon 5"
       ]
     },
     {
       "name": "Game",
       "icon": "fa-solid fa-tag",
       "keywords": [
-      "Arena Breakout",
-      "Delta Force"
+        "Arena Breakout",
+        "Delta Force"
       ]
     }
   ]

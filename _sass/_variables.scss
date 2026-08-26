@@ -6,10 +6,24 @@
 @use "sass:color";
 
 // Colors
-$grey-yellow-color: #9b672c;
-$grey-yellow-dark-color: #301c05;
-$grey-yellow-light-color: #cda06c;
-$yellow-light-color: #f3f1ec;
+// -----------------------------------------------------------------------------
+// UNC Chapel Hill brand palette (https://identity.unc.edu/brand/color-palette/).
+// Carolina Blue is the identity color but fails WCAG AA as small text on a light
+// background, so interactive text uses the deepened variant and Carolina Blue is
+// reserved for dark-mode text and large accents.
+// -----------------------------------------------------------------------------
+$unc-carolina-blue: #4b9cd3; // PMS 542 - primary brand color
+$unc-navy: #13294b; // PMS 282 - primary dark
+$unc-blue-deep: #2d6f9e; // deepened Carolina Blue, 5.0:1 on $unc-bg-light
+$unc-blue-bright: #62aede; // brightened Carolina Blue for dark mode, AA on navy and on cards
+$unc-blue-tint: #a5d0e8; // lightest Carolina Blue, dark-mode hover surface
+$unc-bg-light: #eef3f8; // cool off-white canvas, top of the page gradient
+$unc-bg-light-2: #e3ebf3; // bottom of the page gradient
+$unc-navy-raised: #1c3760; // card / raised surface on navy
+$unc-navy-deep: #0d1c33; // footer on navy
+$unc-text-on-navy: #d5dce6; // body text on navy, 10.5:1
+$unc-text-on-navy-muted: #9fb0c6; // secondary text on navy
+$unc-code-bg-navy: #17304f;
 $red-color: #ff3636 !default;
 $red-color-dark: #b71c1c !default;
 $orange-color: #f29105 !default;
@@ -38,8 +52,8 @@ $black-color: #000000 !default;
 
 // Theme colors
 
-$code-bg-color-light: rgba($purple-color, 0.05);
-$code-bg-color-dark: #2c3237 !default;
+$code-bg-color-light: rgba($unc-carolina-blue, 0.09);
+$code-bg-color-dark: #{$unc-code-bg-navy} !default;
 
 // Font awesome location
 $fa-font-path: "../webfonts";

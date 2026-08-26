@@ -1,34 +1,33 @@
-{% assign lang = site.lang | split: '-' | first %}
+{% assign meta = site.data.github.users[include.username] %}
 
-{% case lang %}
-  {% when 'pt' %}
-    {% assign lang = site.lang %}
+<div class="repo p-2">
+  <a
+    class="repo-card repo-card-user"
+    href="{{ meta.html_url | default: 'https://github.com/' | append: include.username }}"
+    aria-label="{{ include.username }} on GitHub"
+  >
+    <div class="repo-user-head">
+      {% if meta.avatar_url %}
+        <img class="repo-avatar" src="{{ meta.avatar_url }}&s=160" alt="{{ include.username }}" loading="lazy">
+      {% endif %}
+      <div>
+        <div class="repo-card-title">{{ meta.name | default: include.username }}</div>
+        <div class="repo-user-login">@{{ include.username }}</div>
+      </div>
+    </div>
 
-  {% when 'zh' %}
-    {% assign lang_last = site.lang | split: '-' | last %}
-    {% case lang_last %}
-      {% when 'cn', 'sg', 'my', 'hans' %}
-        {% assign lang = 'cn' %}
-      {% when 'tw', 'hk', 'mo', 'hant' %}
-        {% assign lang = 'zh-tw' %}
-    {% endcase %}
+    {% if meta.bio %}
+      <p class="repo-desc">{{ meta.bio }}</p>
+    {% endif %}
 
-    {% comment %} Add a new language using when... if needed {% endcomment %}
-    {% comment %} If you still encounter language-display issues, check the available locale codes in github-readme-stats (different from ISO-639 standard used in your website) {% endcomment %}
-    {% comment %} https://github.com/anuraghazra/github-readme-stats?tab=readme-ov-file#available-locales {% endcomment %}
-{% endcase %}
-
-<div class="repo p-2 text-center">
-  <a href="https://github.com/{{ include.username }}">
-    <img
-      class="only-light w-100"
-      alt="{{ include.username }}"
-      src="https://github-readme-stats.vercel.app/api/?username={{ include.username }}&theme={{ site.repo_theme_light }}&locale={{ lang }}&show_icons=true"
-    >
-    <img
-      class="only-dark w-100"
-      alt="{{ include.username }}"
-      src="https://github-readme-stats.vercel.app/api/?username={{ include.username }}&theme={{ site.repo_theme_dark }}&locale={{ lang }}&show_icons=true"
-    >
+    {% if meta %}
+      <div class="repo-stats">
+        <span><i class="fa-solid fa-book" aria-hidden="true"></i>{{ meta.public_repos }} repos</span>
+        {% if meta.total_stars %}
+          <span><i class="fa-solid fa-star" aria-hidden="true"></i>{{ meta.total_stars }} stars</span>
+        {% endif %}
+        <span><i class="fa-solid fa-user-group" aria-hidden="true"></i>{{ meta.followers }} followers</span>
+      </div>
+    {% endif %}
   </a>
 </div>

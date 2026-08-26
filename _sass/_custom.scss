@@ -1,0 +1,260 @@
+/*******************************************************************************
+ * Fork-specific overrides. Imported last so it wins over the theme defaults.
+ *
+ * Two things live here:
+ *   1. The page reads as a card floating on a tinted canvas.
+ *   2. The about-page header is centred and underlined in Carolina Blue.
+ ******************************************************************************/
+
+// -----------------------------------------------------------------------------
+// 1. Canvas + content card
+// -----------------------------------------------------------------------------
+
+body {
+  background: var(--global-canvas-bg);
+  background-attachment: fixed;
+}
+
+// The single main wrapper emitted by _layouts/default.liquid.
+.container[role="main"] {
+  background-color: var(--global-surface-bg);
+  border-radius: 12px;
+  box-shadow: var(--global-surface-shadow);
+  padding: 2.25rem 3rem 2.75rem;
+  margin-bottom: 3.5rem;
+}
+
+// Full-bleed on phones: a floating card wastes horizontal space below ~576px.
+@media (max-width: 575.98px) {
+  .container[role="main"] {
+    border-radius: 0;
+    padding: 1.5rem 1.25rem 2rem;
+    margin-bottom: 0;
+    box-shadow: none;
+  }
+}
+
+// The navbar sits above the card and must match the top of the canvas gradient,
+// otherwise the seam between them is visible.
+.navbar.fixed-top {
+  background-color: var(--global-bg-color);
+}
+
+// -----------------------------------------------------------------------------
+// 2. About-page header
+// -----------------------------------------------------------------------------
+
+.about-post {
+  > .post-header {
+    text-align: center;
+    border-bottom: 3px solid var(--global-rule-color);
+    padding-bottom: 0.85rem;
+    margin-bottom: 1.75rem;
+
+    .post-title {
+      margin-bottom: 0.35rem;
+      font-weight: 700;
+    }
+
+    .desc {
+      margin-bottom: 0;
+      font-size: 1rem;
+      color: var(--global-text-color-light);
+    }
+  }
+
+  // Section rules ("news", "selected publications") echo the header rule.
+  h2 {
+    border-bottom: 2px solid var(--global-rule-color);
+    padding-bottom: 0.3rem;
+    margin-top: 2.25rem;
+    margin-bottom: 1.1rem;
+  }
+}
+
+// Photo caption: the theme ships this as monospace, which reads as code.
+.profile .more-info {
+  font-family: inherit;
+  font-style: italic;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--global-text-color-light);
+}
+
+// -----------------------------------------------------------------------------
+// 3. Repository cards
+//
+// Rendered from site.data.github (see _plugins/github-metadata.rb) instead of the
+// theme's github-readme-stats images, whose hosted service is down.
+// -----------------------------------------------------------------------------
+
+.repositories {
+  gap: 0;
+}
+
+.repo {
+  width: 100%;
+
+  @media (min-width: 768px) {
+    width: 50%;
+    max-width: 50%;
+  }
+}
+
+.repo-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 10px;
+  background-color: var(--global-bg-color);
+  text-decoration: none;
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    border-color: var(--global-theme-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(19, 41, 75, 0.12);
+    text-decoration: none;
+  }
+}
+
+.repo-card-title {
+  font-weight: 600;
+  color: var(--global-theme-color);
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+
+  i {
+    margin-right: 0.4rem;
+  }
+
+  .repo-owner {
+    font-weight: 400;
+    color: var(--global-text-color-light);
+  }
+}
+
+.repo-desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--global-text-color);
+}
+
+.repo-desc-missing {
+  font-style: italic;
+  color: var(--global-text-color-light);
+}
+
+.repo-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: 0.15rem;
+  font-size: 0.8rem;
+  color: var(--global-text-color-light);
+
+  i {
+    margin-right: 0.3rem;
+  }
+}
+
+.repo-lang-dot {
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  margin-right: 0.4rem;
+  border-radius: 50%;
+  vertical-align: baseline;
+}
+
+.repo-user-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.repo-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.repo-user-login {
+  font-size: 0.85rem;
+  color: var(--global-text-color-light);
+}
+
+// -----------------------------------------------------------------------------
+// 4. Inline institution crests
+//
+// No backing disc: a white chip eats into the box and makes the mark read smaller
+// than the space it occupies. The crests sit directly on the card instead, so
+// `width: auto` matters - the interlocking NC mark is wider than it is tall and
+// a square box would squash it.
+// -----------------------------------------------------------------------------
+
+.inst-logo {
+  height: 1.25em;
+  width: auto;
+  margin-left: 0.28em;
+  vertical-align: -0.28em;
+}
+
+// -----------------------------------------------------------------------------
+// 5. Inline institution / contact links
+// -----------------------------------------------------------------------------
+
+.inst-link {
+  color: var(--global-theme-color);
+  font-weight: 600;
+
+  &:hover {
+    color: var(--global-hover-color);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 6. CV table-of-contents sidebar
+//
+// bootstrap-toc.min.css hardcodes 13px/12px links and a #563d7c purple for the
+// active and hover states, which is both too small to read comfortably and off
+// the site palette.
+// -----------------------------------------------------------------------------
+
+nav[data-toggle="toc"] {
+  .nav > li > a {
+    font-size: 0.95rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    color: var(--global-text-color-light);
+
+    &:focus,
+    &:hover {
+      color: var(--global-theme-color);
+      border-left-color: var(--global-theme-color);
+    }
+  }
+
+  .nav .nav > li > a {
+    font-size: 0.875rem;
+  }
+
+  .nav-link.active,
+  .nav-link.active:focus,
+  .nav-link.active:hover {
+    color: var(--global-theme-color);
+    border-left-color: var(--global-theme-color);
+  }
+}

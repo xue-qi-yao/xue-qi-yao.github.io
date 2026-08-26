@@ -1,0 +1,11 @@
+{%- comment -%}
+Small institution crest, sized to sit inline with body text.
+Usage: {% include inst_logo.liquid file="unc.svg" alt="UNC Chapel Hill" %}
+
+`bust_file_cache` appends an MD5 of the file, so swapping a crest actually reaches
+visitors instead of leaving them on a browser-cached copy of the old one.
+
+This file deliberately ends without a trailing newline: Jekyll emits an include
+verbatim, so a final newline would render as a stray space between the crest and
+whatever punctuation follows it.
+{%- endcomment -%}<img class="inst-logo" src="{{ '/assets/img/logos/' | append: include.file | relative_url | bust_file_cache }}" alt="{{ include.alt }}" title="{{ include.alt }}">

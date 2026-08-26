@@ -28,7 +28,16 @@ module Jekyll
     def render(context)
       article_id = context[@article_id.strip]
       scholar_id = context[@scholar_id.strip]
-      article_url = "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=#{scholar_id}&citation_for_view=#{scholar_id}:#{article_id}"
+
+      # Tolerate a scholar id pasted straight out of a profile URL (e.g. "ABC123&hl=en")
+      scholar_id = scholar_id.to_s.split("&").first
+
+      # `google_scholar_id` in the .bib may hold either the bare article id or the
+      # full "<user>:<article>" form that citation_for_view actually expects.
+      article_id = article_id.to_s
+      citation_for_view = article_id.include?(":") ? article_id : "#{scholar_id}:#{article_id}"
+
+      article_url = "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=#{scholar_id}&citation_for_view=#{citation_for_view}"
 
       begin
           # If the citation count has already been fetched, return it

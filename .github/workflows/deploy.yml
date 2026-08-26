@@ -89,6 +89,10 @@ jobs:
           propertyPath: "giscus.repo"
           value: ${{ github.repository }}
       - name: Install and Build 🔧
+        env:
+          # Lifts the GitHub API rate limit for _plugins/github-metadata.rb
+          # (60 req/hour unauthenticated, shared across all Actions runners).
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           sudo apt-get update && sudo apt-get install -y imagemagick
           pip3 install --upgrade nbconvert

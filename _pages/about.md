@@ -2,14 +2,14 @@
 layout: about
 title: about
 permalink: /
-# subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: PhD Student in Data Science, <a href="https://www.unc.edu/">University of North Carolina at Chapel Hill</a>
 
 profile:
   align: right
   image: qiyao_xue_pic.png
   image_circular: false # crops the image to make it circular
   more_info: >
-    <p>US, Pennsylvania, Pittsburgh</p>
+    <p>Chapel Hill, North Carolina, US</p>
 
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
@@ -25,10 +25,10 @@ announcements:
 #   limit: 3 # leave blank to include all the blog posts
 ---
 
-Hi! I'm Qiyao Xue, currently a first year PhD student in the Department of Electrical and Computer Engineering at the University of Pittsburgh advised by [Prof Wei Gao](https://sites.pitt.edu/~weigao/). Before that, I obtained by bachelor degree with first class honor at Hong Kong Polytechnic University major in Electrical Engineering and minor in Applied Mathematics.
+Hi! I'm Qiyao Xue (薛琪耀), a first-year PhD student in Data Science at the <a class="inst-link" href="https://www.unc.edu/">University of North Carolina at Chapel Hill</a>{% include inst_logo.liquid file="unc.svg" alt="University of North Carolina at Chapel Hill" %}, starting in Fall 2026.
 
-My research interest lies in multimodal generative AI, bridging language, vision, and audio that move toward world models capable of perceiving, reasoning, and generating across modalities.
+My future research will center on **agentic and self-evolving AI**, particularly for **healthcare**. I am interested in developing agents that can reason, plan, act, use tools, learn from feedback, and improve over time, while integrating multimodal evidence across complex environments. A central goal of my work is to understand how such increasingly autonomous AI systems can become reliable and trustworthy collaborators in clinical practice.
 
-In the past, I worked on deep learning, computer vision and natural language processing. I'm fortunate to had the opportunities to collaborate with [Prof Xiang Lorraine Li](https://lorraine333.github.io/) on natural language processing, [Prof Qi Dou](http://www.cse.cuhk.edu.hk/~qdou/) on medical image analysis.
+Previously, I was a PhD student in the Department of Electrical and Computer Engineering at the <a class="inst-link" href="https://www.pitt.edu/">University of Pittsburgh</a>{% include inst_logo.liquid file="pitt.svg" alt="University of Pittsburgh" %}, where I worked on multimodal generative AI — bridging language, vision, and audio toward world models capable of perceiving, reasoning, and generating across modalities. Before that, I obtained my bachelor's degree with first class honours at the <a class="inst-link" href="https://www.polyu.edu.hk/">Hong Kong Polytechnic University</a>{% include inst_logo.liquid file="polyu.svg" alt="Hong Kong Polytechnic University" %}, majoring in Electrical Engineering with a minor in Applied Mathematics.
 
-Contact: **19083647d AT connect.polyu.hk**
+Contact: <a class="inst-link" href="mailto:{{ site.data.socials.email | encode_email }}">{{ site.data.socials.email }}</a>
