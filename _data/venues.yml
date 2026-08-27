@@ -19,3 +19,15 @@
 
 "AAAI":
   color: "#c23111"
+
+"ECCV":
+  url: https://eccv.ecva.net/
+  color: "#00369f"
+
+"BioNLP":
+  url: https://aclweb.org/aclwiki/BioNLP_Workshop
+  color: "#0b6b53"
+
+"arXiv":
+  url: https://arxiv.org/
+  color: "#b31b1b"

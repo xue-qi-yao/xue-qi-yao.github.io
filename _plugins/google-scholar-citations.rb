@@ -79,11 +79,14 @@ module Jekyll
           doc = Nokogiri::HTML(URI.open(url, "User-Agent" => "Ruby/#{RUBY_VERSION}",
                                              :read_timeout => 15, :open_timeout => 15).read)
           meta = doc.css('meta[name="description"]').first || doc.css('meta[property="og:description"]').first
-          matched = meta && meta["content"].to_s.match(/Cited by (\d+[,\d]*)/)
-          raise "no citation count in the page" unless matched
+          # The meta tag is the proof the page actually loaded. Scholar simply omits
+          # "Cited by" for a paper with no citations yet, which is a 0, not a failure.
+          raise "citation page did not load" unless meta
+
+          matched = meta["content"].to_s.match(/Cited by (\d+[,\d]*)/)
 
           human = ActiveSupport::NumberHelper.number_to_human(
-            matched[1].delete(",").to_i,
+            matched ? matched[1].delete(",").to_i : 0,
             :format => "%n%u", :precision => 2,
             :units => { :thousand => "K", :million => "M", :billion => "B" }
           )

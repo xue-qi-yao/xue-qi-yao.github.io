@@ -13,3 +13,6 @@ _scripts/*
 # Must end without a trailing newline, or the crest renders a stray space
 # before the punctuation that follows it. See the comment inside the file.
 _includes/inst_logo.liquid
+# Rewritten by _plugins/google-scholar-citations.rb on every successful build;
+# formatting it here would just churn against the plugin.
+_data/scholar_citations.yml
