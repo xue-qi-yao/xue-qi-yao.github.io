@@ -3,20 +3,26 @@ require "nokogiri"
 require "open-uri"
 require "yaml"
 
-# Renders the Google Scholar citation count for one publication.
+# Google Scholar citation counts.
 #
-# Google Scholar refuses requests from datacenter IP ranges, so the live fetch
-# reliably fails on GitHub Actions runners and every badge used to render "N/A"
-# on the deployed site while working fine locally. Counts that were fetched
-# successfully are therefore persisted to _data/scholar_citations.yml and used as
-# the fallback, so a build that cannot reach Scholar still shows real numbers.
+# Fetching happens in a Generator rather than in the Liquid tag because the count
+# also drives ordering: jekyll-scholar sorts the bibliography before any tag is
+# rendered, so a count fetched at render time would always be one build stale.
+# The generator writes the count into the .bib as a zero-padded `citation_sort`
+# field (jekyll-scholar compares field values as strings, so "7" would otherwise
+# sort above "84") and the tag just reads what was already fetched.
 #
-# Refresh the numbers by building locally (from a residential connection) and
-# committing the updated cache file.
+# Scholar refuses requests from datacenter IP ranges, so the fetch reliably fails
+# on GitHub Actions runners. Successful counts are persisted to
+# _data/scholar_citations.yml and used as the fallback, which is what keeps the
+# deployed badges showing real numbers instead of "N/A". Refresh them by building
+# locally and committing the updated cache and .bib.
 module Jekyll
-  class GoogleScholarCitationsTag < Liquid::Tag
+  module ScholarCitations
     CACHE_FILE = "_data/scholar_citations.yml".freeze
-    CACHE_HEADER = <<~HEADER
+    BIB_FILE = "_bibliography/papers.bib".freeze
+
+    CACHE_HEADER = <<~HEADER.freeze
       # Google Scholar citation counts, cached by _plugins/google-scholar-citations.rb.
       #
       # Scholar blocks datacenter IPs, so CI cannot fetch these. This file is the
@@ -26,11 +32,9 @@ module Jekyll
     HEADER
 
     class << self
-      # Shared across tag instances: the badge renders the same count twice (src
-      # and alt), and each publication would otherwise be fetched twice, doubling
-      # the requests and tripping Scholar's throttle.
-      def fetched
-        @fetched ||= {}
+      # key ("<user>:<article>") => Integer
+      def counts
+        @counts ||= {}
       end
 
       def cache
@@ -41,18 +45,96 @@ module Jekyll
         end
       end
 
-      # Only ever called with a freshly fetched value, so a blocked build can
-      # never overwrite good data with "N/A".
-      def remember(key, value)
-        return if cache[key] == value
+      def humanize(count)
+        ActiveSupport::NumberHelper.number_to_human(
+          count,
+          :format => "%n%u", :precision => 2,
+          :units => { :thousand => "K", :million => "M", :billion => "B" }
+        )
+      end
 
-        cache[key] = value
-        File.write(CACHE_FILE, CACHE_HEADER + cache.sort.to_h.to_yaml)
+      def fetch(scholar_id, key)
+        url = "https://scholar.google.com/citations?view_op=view_citation&hl=en" \
+              "&user=#{scholar_id}&citation_for_view=#{key}"
+
+        sleep(rand(1.5..3.5)) # Scholar throttles aggressively
+        doc = Nokogiri::HTML(URI.open(url, "User-Agent" => "Ruby/#{RUBY_VERSION}",
+                                           :read_timeout => 15, :open_timeout => 15).read)
+        meta = doc.css('meta[name="description"]').first ||
+               doc.css('meta[property="og:description"]').first
+        # The meta tag is the proof the page loaded. Scholar simply omits "Cited by"
+        # for a paper with no citations yet, which is a 0, not a failure.
+        raise "citation page did not load" unless meta
+
+        matched = meta["content"].to_s.match(/Cited by (\d+[,\d]*)/)
+        matched ? matched[1].delete(",").to_i : 0
+      end
+
+      def write_cache!
+        payload = counts.sort.to_h.transform_values(&:to_s)
+        return if payload == cache
+
+        File.write(CACHE_FILE, CACHE_HEADER + payload.to_yaml)
+        @cache = payload
       rescue StandardError => e
         Jekyll.logger.warn "Scholar citations:", "could not write #{CACHE_FILE} (#{e.message})"
       end
-    end
 
+      # Keeps a zero-padded sort key next to each google_scholar_id so that
+      # {% bibliography --sort_by citation_sort %} orders by citations.
+      def write_sort_keys!
+        return unless File.exist?(BIB_FILE)
+
+        src = File.read(BIB_FILE)
+        out = src.gsub(/^([ \t]*)google_scholar_id=\{([^}]+)\},\n(?:[ \t]*citation_sort=\{[^}]*\},\n)?/) do
+          indent = Regexp.last_match(1)
+          key = Regexp.last_match(2)
+          count = counts[key]
+          sort_line = count ? format("%<indent>scitation_sort={%<count>06d},\n", :indent => indent, :count => count) : ""
+          "#{indent}google_scholar_id={#{key}},\n#{sort_line}"
+        end
+
+        File.write(BIB_FILE, out) unless out == src
+      rescue StandardError => e
+        Jekyll.logger.warn "Scholar citations:", "could not update #{BIB_FILE} (#{e.message})"
+      end
+    end
+  end
+
+  class ScholarCitationsGenerator < Generator
+    safe true
+    priority :highest
+
+    def generate(site)
+      # Tolerate an id pasted straight out of a profile URL (e.g. "ABC123&hl=en").
+      scholar_id = site.data.dig("socials", "scholar_userid").to_s.split("&").first
+      return if scholar_id.nil? || scholar_id.empty?
+      return unless File.exist?(ScholarCitations::BIB_FILE)
+
+      keys = File.read(ScholarCitations::BIB_FILE).scan(/google_scholar_id=\{([^}]+)\}/).flatten.uniq
+      return if keys.empty?
+
+      keys.each do |key|
+        lookup = key.include?(":") ? key : "#{scholar_id}:#{key}"
+        begin
+          ScholarCitations.counts[key] = ScholarCitations.fetch(scholar_id, lookup)
+        rescue StandardError => e
+          cached = ScholarCitations.cache[key]
+          if cached
+            Jekyll.logger.info "Scholar citations:", "#{key} unreachable (#{e.class}), using cached #{cached}"
+            ScholarCitations.counts[key] = cached.to_i
+          else
+            Jekyll.logger.warn "Scholar citations:", "#{key} unreachable (#{e.class}) and not cached"
+          end
+        end
+      end
+
+      ScholarCitations.write_cache!
+      ScholarCitations.write_sort_keys!
+    end
+  end
+
+  class GoogleScholarCitationsTag < Liquid::Tag
     def initialize(tag_name, params, tokens)
       super
       splitted = params.split(" ").map(&:strip)
@@ -63,47 +145,10 @@ module Jekyll
     def render(context)
       scholar_id = context[@scholar_id.to_s.strip].to_s.split("&").first
       article_id = context[@article_id.to_s.strip].to_s
-
-      # `google_scholar_id` in the .bib may hold either the bare article id or the
-      # full "<user>:<article>" form that citation_for_view expects.
       key = article_id.include?(":") ? article_id : "#{scholar_id}:#{article_id}"
-      memo = self.class.fetched[key]
-      return memo if memo
 
-      url = "https://scholar.google.com/citations?view_op=view_citation&hl=en" \
-            "&user=#{scholar_id}&citation_for_view=#{key}"
-
-      count =
-        begin
-          sleep(rand(1.5..3.5)) # be gentle; Scholar throttles aggressively
-          doc = Nokogiri::HTML(URI.open(url, "User-Agent" => "Ruby/#{RUBY_VERSION}",
-                                             :read_timeout => 15, :open_timeout => 15).read)
-          meta = doc.css('meta[name="description"]').first || doc.css('meta[property="og:description"]').first
-          # The meta tag is the proof the page actually loaded. Scholar simply omits
-          # "Cited by" for a paper with no citations yet, which is a 0, not a failure.
-          raise "citation page did not load" unless meta
-
-          matched = meta["content"].to_s.match(/Cited by (\d+[,\d]*)/)
-
-          human = ActiveSupport::NumberHelper.number_to_human(
-            matched ? matched[1].delete(",").to_i : 0,
-            :format => "%n%u", :precision => 2,
-            :units => { :thousand => "K", :million => "M", :billion => "B" }
-          )
-          self.class.remember(key, human)
-          human
-        rescue StandardError => e
-          cached = self.class.cache[key]
-          if cached
-            Jekyll.logger.info "Scholar citations:", "#{key} unreachable (#{e.class}), using cached #{cached}"
-            cached
-          else
-            Jekyll.logger.warn "Scholar citations:", "#{key} unreachable (#{e.class}: #{e.message}) and not cached"
-            "N/A"
-          end
-        end
-
-      self.class.fetched[key] = count.to_s
+      count = ScholarCitations.counts[key] || ScholarCitations.cache[key]&.to_i
+      count.nil? ? "N/A" : ScholarCitations.humanize(count)
     end
   end
 end
