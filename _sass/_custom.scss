@@ -258,3 +258,63 @@ nav[data-toggle="toc"] {
     border-left-color: var(--global-theme-color);
   }
 }
+
+// -----------------------------------------------------------------------------
+// 7. Venue chips
+//
+// The theme paints chip text with --global-card-bg-color, which is white in light
+// mode but navy in dark mode - so a venue without a `url` (and therefore without
+// the inner <a> that is hardcoded to white) rendered as dark text on a dark chip.
+// Every venue colour in _data/venues.yml clears 4.5:1 against white, so pin it.
+// -----------------------------------------------------------------------------
+
+// A venue with a `url` renders as <abbr><a>NAME</a></abbr> and the theme paints
+// that <a> white. A venue without one renders as <abbr><div>NAME</div></abbr>,
+// and _base's blanket `p, h1..h6, em, div, li, span, strong` rule repaints that
+// inner div with --global-text-color - black in light mode. Pin the chip and its
+// inner element; every venue colour in _data/venues.yml clears 4.5:1 on white.
+.publications ol.bibliography li .abbr abbr {
+  color: #ffffff !important;
+
+  a,
+  div,
+  span {
+    color: #ffffff !important;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 8. Collapsible news list
+// -----------------------------------------------------------------------------
+
+.news-row[hidden] {
+  display: none !important;
+}
+
+.news-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: -0.5rem;
+
+  .news-toggle {
+    padding: 0.35rem 1.4rem;
+    border: 0;
+    border-radius: 999px;
+    background: none;
+    line-height: 1;
+    color: var(--global-text-color-light);
+    cursor: pointer;
+    transition:
+      color 0.15s ease,
+      background-color 0.15s ease;
+
+    &:hover {
+      color: var(--global-theme-color);
+      background-color: var(--global-code-bg-color);
+    }
+
+    i {
+      font-size: 1rem;
+    }
+  }
+}

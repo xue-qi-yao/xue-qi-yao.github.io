@@ -1,4 +1,29 @@
-<div class="news">
+{%- comment -%}
+  Collapsible news list.
+
+  With include.limit (the home page) every item is rendered but only the newest
+  `batch` rows are visible; each click on "show more" reveals another `batch`.
+  Rendering all of them and hiding the overflow - rather than truncating in
+  Liquid - is what lets the expansion happen without a page load.
+
+  Without include.limit (/news) everything is shown and no controls appear.
+{%- endcomment -%}
+
+{% assign batch = 5 %}
+{% if include.limit and page.announcements.limit %}
+  {% assign batch = page.announcements.limit %}
+{% endif %}
+{% assign collapsible = false %}
+{% if include.limit %}
+  {% assign collapsible = true %}
+{% endif %}
+
+<div
+  class="news"
+  {% if collapsible %}
+    data-news-batch="{{ batch }}"
+  {% endif %}
+>
   {% if site.news != blank %}
     {% assign news_size = site.news | size %}
     <div
@@ -9,13 +34,13 @@
     >
       <table class="table table-sm table-borderless">
         {% assign news = site.news | reverse %}
-        {% if include.limit and page.announcements.limit %}
-          {% assign news_limit = page.announcements.limit %}
-        {% else %}
-          {% assign news_limit = news_size %}
-        {% endif %}
-        {% for item in news limit: news_limit %}
-          <tr>
+        {% for item in news %}
+          <tr
+            class="news-row"
+            {% if collapsible and forloop.index > batch %}
+              hidden
+            {% endif %}
+          >
             <th scope="row" style="width: 20%">{{ item.date | date: '%b %d, %Y' }}</th>
             <td>
               {% if item.inline %}
@@ -28,6 +53,14 @@
         {% endfor %}
       </table>
     </div>
+
+    {% if collapsible and news_size > batch %}
+      <div class="news-controls">
+        <button type="button" class="news-toggle" aria-label="Show more news" aria-expanded="false">
+          <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </button>
+      </div>
+    {% endif %}
   {% else %}
     <p>No news so far...</p>
   {% endif %}
