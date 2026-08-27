@@ -1,0 +1,11 @@
+# Google Scholar citation counts, cached by _plugins/google-scholar-citations.rb.
+#
+# Scholar blocks datacenter IPs, so CI cannot fetch these. This file is the
+# fallback that keeps the deployed badges showing real numbers. It is rewritten
+# automatically whenever a build DOES reach Scholar (i.e. when you build
+# locally) - commit the change to publish the updated counts.
+---
+yNPzzOAAAAAJ:9yKSN-GCB0IC: '7'
+yNPzzOAAAAAJ:d1gkVwhDpl0C: '6'
+yNPzzOAAAAAJ:u-x6o8ySG0sC: '84'
+yNPzzOAAAAAJ:zYLM7Y9cAGgC: '6'
