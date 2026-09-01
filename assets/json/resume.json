@@ -26,7 +26,8 @@
       "area": "Electrical and Computer Engineering",
       "studyType": "PhD",
       "startDate": "2024-08-30",
-      "endDate": "2026-07-31"
+      "endDate": "2026-07-31",
+      "courses": ["Transferred to UNC-Chapel Hill in 2026 to pursue a PhD in Data Science"]
     },
     {
       "institution": "Hong Kong Polytechnic University",
@@ -142,23 +143,12 @@
     {
       "name": "Music",
       "icon": "fa-solid fa-tag",
-      "keywords": [
-        "Eason Chan",
-        "JJ Lin",
-        "Joker Xue",
-        "Jay Chou",
-        "Shawn Mendes",
-        "Ed Sheeran",
-        "Maroon 5"
-      ]
+      "keywords": ["Eason Chan", "JJ Lin", "Joker Xue", "Jay Chou", "Shawn Mendes", "Ed Sheeran", "Maroon 5"]
     },
     {
       "name": "Game",
       "icon": "fa-solid fa-tag",
-      "keywords": [
-        "Arena Breakout",
-        "Delta Force"
-      ]
+      "keywords": ["Arena Breakout", "Delta Force"]
     }
   ]
 }
