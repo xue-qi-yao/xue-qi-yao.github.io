@@ -75,6 +75,9 @@ ninja.data = [{
           section: "News",},{id: "news-started-as-a-first-year-phd-student-in-data-science-at-the-university-of-north-carolina-at-chapel-hill-after-moving-on-from-the-ece-phd-program-at-the-university-of-pittsburgh-new-focus-agentic-and-self-evolving-ai-particularly-for-healthcare",
           title: 'Started as a first-year PhD student in Data Science at the University of...',
           description: "",
+          section: "News",},{id: "news-paper-accepted-to-mobicom-26-spatialmind-spatially-aware-on-device-embodied-ai-via-viewpoint-integration",
+          title: 'Paper accepted to MobiCom’26: SpatialMind: Spatially Aware On-Device Embodied AI via Viewpoint Integration...',
+          description: "",
           section: "News",},{
         id: 'social-email',
         title: 'email',
