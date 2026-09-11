@@ -20,6 +20,10 @@
 "AAAI":
   color: "#c23111"
 
+"MobiCom":
+  url: https://www.sigmobile.org/mobicom/2026/
+  color: "#6a3d9a"
+
 "ECCV":
   url: https://eccv.ecva.net/
   color: "#00369f"

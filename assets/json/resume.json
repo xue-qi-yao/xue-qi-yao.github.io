@@ -63,6 +63,12 @@
       "publisher": "IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Oral",
       "releaseDate": "2026",
       "url": "https://arxiv.org/pdf/2511.18200"
+    },
+    {
+      "name": "SpatialMind: Spatially Aware On-Device Embodied AI via Viewpoint Integration",
+      "publisher": "ACM International Conference on Mobile Computing and Networking (MobiCom)",
+      "releaseDate": "2026",
+      "url": "https://sites.pitt.edu/~weigao/publications/mobicom26-spatialmind.pdf"
     }
   ],
   "awards": [
