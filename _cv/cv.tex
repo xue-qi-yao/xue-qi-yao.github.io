@@ -1,0 +1,160 @@
+% Source for assets/pdf/cv.pdf (linked from /cv/).
+% Build from the repo root:
+%   latexmk -pdf -outdir=_cv/build _cv/cv.tex && cp _cv/build/cv.pdf assets/pdf/cv.pdf
+% _cv/ starts with an underscore, so Jekyll does not publish it.
+
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[charter]{mathdesign}
+\usepackage[margin=0.7in,top=0.6in,bottom=0.6in]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{needspace}
+\usepackage{fontawesome5}
+\usepackage[hidelinks]{hyperref}
+
+% UNC brand palette, same values as _sass/_variables.scss
+\definecolor{accent}{HTML}{13294B}   % UNC navy (PMS 282)
+\definecolor{carolina}{HTML}{4B9CD3} % Carolina Blue (PMS 542), decorative only
+\definecolor{uncdeep}{HTML}{2D6F9E}  % deepened Carolina Blue, readable as text
+\hypersetup{colorlinks=true,urlcolor=uncdeep,linkcolor=uncdeep}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\linespread{1.05}
+
+\titleformat{\section}{\needspace{6\baselineskip}\large\scshape\bfseries\color{accent}}{}{0pt}{}[\vspace{-0.6em}{\color{carolina}\rule{\linewidth}{0.8pt}}]
+\titlespacing*{\section}{0pt}{0.9em}{0.5em}
+
+\setlist[itemize]{leftmargin=1.2em,itemsep=0.1em,topsep=0.15em,parsep=0pt,label={\small\color{carolina}\textbullet},after=\vspace{0.3em}}
+
+% \entry{Left bold}{Right date}{Left second line}{Right second line}
+\newcommand{\entry}[4]{%
+  \begin{tabularx}{\linewidth}{@{}X r@{}}
+    \textbf{#1} & #2 \\
+    \textit{#3} & \textit{#4} \\
+  \end{tabularx}\vspace{0.15em}}
+
+\newcommand{\me}{\textbf{Qiyao Xue}}
+\newcommand{\venue}[1]{\textit{#1}}
+\newcommand{\highlight}[1]{\textbf{\color{BrickRed}#1}}
+\newcommand{\pub}[3]{\item {\hypersetup{urlcolor=accent}\textbf{#2}}\\ #3\\ #1}
+
+\begin{document}
+
+%--------------------------------------------------------------------
+\begin{center}
+  {\Huge\bfseries\color{accent} Qiyao Xue}\\[0.35em]
+  PhD Student in Data Science, University of North Carolina at Chapel Hill\\[0.3em]
+  \small
+  \faEnvelope\ \href{mailto:qiyaoxue@unc.edu}{qiyaoxue@unc.edu} \quad
+  \faGlobe\ \href{https://xue-qi-yao.github.io}{xue-qi-yao.github.io} \quad
+  \faGraduationCap\ \href{https://scholar.google.com/citations?user=yNPzzOAAAAAJ}{Google Scholar} \quad
+  \faGithub\ \href{https://github.com/xue-qi-yao}{xue-qi-yao} \quad
+  \faOrcid\ \href{https://orcid.org/0009-0000-4443-0756}{0009-0000-4443-0756}
+\end{center}
+
+%--------------------------------------------------------------------
+\section{Research Interests}
+\textbf{Current:} Agentic and self-evolving AI: agents that reason, plan, use tools, and improve from feedback.\\
+\textbf{Previous:} Multimodal generative AI, visual spatial reasoning, and physics-grounded video generation.
+
+%--------------------------------------------------------------------
+\section{Education}
+\entry{University of North Carolina at Chapel Hill}{Chapel Hill, NC}
+      {Ph.D. in Data Science}{Aug 2026 -- Present}
+\entry{University of Pittsburgh}{Pittsburgh, PA}
+      {Ph.D. student in Electrical and Computer Engineering (transferred to UNC)}{Aug 2024 -- Jul 2026}
+\entry{The Hong Kong Polytechnic University}{Hong Kong}
+      {B.Eng. in Electrical Engineering, First Class Honours; Minor in Applied Mathematics}{Sep 2019 -- Jun 2023}
+\vspace{-0.4em}
+\begin{itemize}
+  \item GPA 3.74/4.3 (top 2\%); exchange at University of Maryland, College Park (Spring 2022).
+\end{itemize}
+
+%--------------------------------------------------------------------
+\section{Publications}
+\textbf{Conference \& Workshop Papers}
+\begin{itemize}[itemsep=0.3em]
+  \pub{\me, Xiangyu Yin, Boyuan Yang, Wei Gao}
+      {\href{https://openaccess.thecvf.com/content/CVPR2025/papers/Xue_PhyT2V_LLM-Guided_Iterative_Self-Refinement_for_Physics-Grounded_Text-to-Video_Generation_CVPR_2025_paper.pdf}{PhyT2V: LLM-Guided Iterative Self-Refinement for Physics-Grounded Text-to-Video Generation}}
+      {\venue{CVPR}, 2025}
+  \pub{\me, Yuchen Dou, Ryan Shi, Xiang Lorraine Li, Wei Gao}
+      {\href{https://arxiv.org/pdf/2508.00760}{MMBERT: Scaled Mixture-of-Experts Multimodal BERT for Robust Chinese Hate Speech Detection under Cloaking Perturbations}}
+      {\venue{AAAI}, 2026}
+  \pub{\me, Weichen Liu, Shiqi Wang, Haoming Wang, Yuyang Wu, Wei Gao}
+      {\href{https://arxiv.org/pdf/2512.02340}{Reasoning Path and Latent State Analysis for Multi-view Visual Spatial Reasoning: A Cognitive Science Perspective}}
+      {\venue{ECCV}, 2026}
+  \pub{Xiangyu Yin, Boyuan Yang, Weichen Liu, \me, Abrar Alamri, Goeran Fiedler, Wei Gao}
+      {\href{https://arxiv.org/pdf/2507.10223}{ProGait: A Multi-Purpose Video Dataset and Benchmark for Transfemoral Prosthesis Users}}
+      {\venue{ICCV}, 2025. \highlight{Highlight}}
+  \pub{Haoming Wang, \me, Wei Gao}
+      {\href{https://arxiv.org/pdf/2511.18200}{InfiniBench: Infinite Benchmarking for Visual Spatial Reasoning with Customizable Scene Complexity}}
+      {\venue{CVPR}, 2026. \highlight{Oral}}
+  \pub{Haoming Wang, \me, Weichen Liu, Boyuan Yang, Xiangyu Yin, Wei Gao}
+      {\href{https://sites.pitt.edu/~weigao/publications/mobicom26-spatialmind.pdf}{SpatialMind: Spatially Aware On-Device Embodied AI via Viewpoint Integration}}
+      {\venue{ACM MobiCom}, 2026}
+  \pub{Weichen Liu, \me, Yuyang Wu, Olexandr Isayev, Natasa Miskov-Zivanov}
+      {\href{https://aclanthology.org/2026.bionlp-1.22.pdf}{KGRxn-LLM: Knowledge Graph Enhanced Large Language Models for Molecular Reaction Reasoning}}
+      {\venue{BioNLP Workshop @ ACL}, 2026}
+\end{itemize}
+
+\needspace{5\baselineskip}\textbf{Preprints}
+\begin{itemize}[itemsep=0.3em]
+  \pub{Yuyang Wu, \me, Guanxing Lu, Weichen Liu, Zihan Wang, Manling Li, Olexandr Isayev}
+      {\href{https://arxiv.org/pdf/2605.22211}{CLORE: Content-Level Optimization for Reasoning Efficiency}}
+      {arXiv:2605.22211, 2026}
+  \pub{Yuyang Wu, Yue Huang, Shuaike Shen, Xujian Wang, Shuhao Zhang, \me, Weichen Liu, Runtian Gao, Jian Ma,
+       Xiangliang Zhang, Olexandr Isayev}
+      {\href{https://arxiv.org/pdf/2605.07251}{Can Agents Price a Reaction? Evaluating LLMs on Chemical Cost Reasoning}}
+      {arXiv:2605.07251, 2026}
+  \pub{Weichen Liu, \me, Haoming Wang, Xiangyu Yin, Boyuan Yang, Wei Gao}
+      {\href{https://arxiv.org/pdf/2511.15722}{Spatial Reasoning in Multimodal Large Language Models: A Survey of Tasks, Benchmarks and Methods}}
+      {arXiv:2511.15722, 2025}
+\end{itemize}
+
+%--------------------------------------------------------------------
+\section{Research Experience}
+\entry{Intelligent Systems Lab, University of Pittsburgh}{Pittsburgh, PA}
+      {Graduate Research Assistant, with Prof.\ Wei Gao}{Aug 2024 -- Jul 2026}
+\vspace{-0.4em}
+\begin{itemize}
+  \item Proposed PhyT2V, a training-free, LLM-guided self-refinement loop that improves the physical realism and temporal
+        causality of text-to-video diffusion models (CVPR 2025, first author).
+  \item Built InfiniBench, a procedurally generated benchmark for visual spatial reasoning with controllable scene
+        complexity (CVPR 2026 Oral), and analyzed MLLM reasoning paths and latent states on multi-view spatial tasks (ECCV 2026, first author).
+  \item Designed MMBERT, a Mixture-of-Experts multimodal BERT with a three-stage training recipe for robust hate speech
+        detection under adversarial cloaking (AAAI 2026, first author).
+\end{itemize}
+\vspace{0.3em}
+\entry{Med-AIR Lab, The Chinese University of Hong Kong}{Hong Kong}
+      {Research Assistant, with Prof.\ Qi Dou}{Jul 2023 -- Mar 2024}
+\vspace{-0.4em}
+\begin{itemize}
+  \item Developed nnU-Net / Transformer-based models for multi-organ segmentation and ViT-based multi-disease detection
+        on medical images, and a SAM-based interactive 3D MRI annotation tool.
+\end{itemize}
+
+%--------------------------------------------------------------------
+\section{Honors \& Awards}
+\begin{tabularx}{\linewidth}{@{}X r@{}}
+  Outstanding Student Award (top 1 in department), Dept.\ of Electrical Engineering, PolyU & 2023 \\
+  President Emeritus Professor Poon Chung-kwong Scholarship (top 2), PolyU & 2022 \\
+  Wong Ti-shing Student Exchange Scholarship, PolyU & 2022 \\
+  Undergraduate Research Innovation Scheme Scholarship, PolyU & 2022 \\
+  HKSAR Government Scholarship Fund -- Reaching Out Award & 2022 \\
+  VTech Group of Companies Scholarship (top 4), PolyU & 2022 \\
+  Professor Leung Tin-pui Memorial Scholarship (top 2), PolyU & 2021 \\
+  Dean's Honours List, PolyU & 2020 -- 2022 \\
+\end{tabularx}
+
+%--------------------------------------------------------------------
+\section{Skills}
+\textbf{Programming:} Python (PyTorch, Hugging Face Transformers/Diffusers, NumPy, pandas), C/C++, MATLAB, SQL \\
+\textbf{Tools:} Linux, Git, Docker, \LaTeX
+
+\end{document}
