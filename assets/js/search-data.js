@@ -78,6 +78,9 @@ ninja.data = [{
           section: "News",},{id: "news-paper-accepted-to-mobicom-26-spatialmind-spatially-aware-on-device-embodied-ai-via-viewpoint-integration",
           title: 'Paper accepted to MobiCom’26: SpatialMind: Spatially Aware On-Device Embodied AI via Viewpoint Integration...',
           description: "",
+          section: "News",},{id: "news-paper-accepted-to-neurips-26-can-agents-price-a-reaction-evaluating-llms-on-chemical-cost-reasoning",
+          title: 'Paper accepted to NeurIPS’26: Can Agents Price a Reaction? Evaluating LLMs on Chemical...',
+          description: "",
           section: "News",},{
         id: 'social-email',
         title: 'email',
